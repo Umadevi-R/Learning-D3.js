@@ -13,7 +13,7 @@ fetch(api)
     .then(function(response) { return response.json(); })
     .then(function(data) {
         var parsedData = parseData(data);
-        drawChart(parsedData);
+        drawChart(parsedData); //responsible to create line chart
     })
     .catch(function(err) { console.log(err); })
 });
@@ -64,10 +64,9 @@ var line = d3.line()
 
 g.append("g")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x))
-    .select(".domain")
-    .remove();
+    .call(d3.axisBottom(x)) //call method calls the axis bottom on our newly created element
 
+//Below code generates y axis
 g.append("g")
     .call(d3.axisLeft(y))
     .append("text")
@@ -78,6 +77,7 @@ g.append("g")
     .attr("text-anchor", "end")
     .text("Price ($)");
 
+//Draws lines
 g.append("path")
     .datum(data)
     .attr("fill", "none")
